@@ -1,5 +1,11 @@
 import myKoa from 'ff-koa/lib/mock.js'
 const router = myKoa.router
+const app = myKoa.app
+import staticKoa from 'koa-static'// 处理静态资源
+
+// 静态文件处理
+app.use(staticKoa('../dist'))
+app.use(staticKoa('../public'))
 
 const tokens = {
   superadmin: {

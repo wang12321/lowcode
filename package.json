@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "lowcode",
   "author": "FF",
+  "bin": {
+    "ffLow": "./bin/ff.js"
+  },
   "scripts": {
     "mock": "cd mock && node --experimental-modules ./mock.mjs",
     "dev:mock": "concurrently \"vue-cli-service serve\" \"npm run mock\"",
@@ -28,6 +31,7 @@
     "fuse.js": "^6.4.6",
     "js-cookie": "2.2.0",
     "js-utils-lc": "^1.0.4",
+    "koa-static": "^5.0.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
