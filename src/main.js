@@ -33,7 +33,9 @@ import 'vue-ele-component-zonst/lib/index/style/index.css'
 // 全部引入 vue-ele-component-zonst js
 import VueEleComponentZonst from 'vue-ele-component-zonst'
 // 在ElementUI后调用
-Vue.use(ElementUI).use(VueEleComponentZonst)
+import VueDND from 'awe-dnd' // 列表拖拽
+
+Vue.use(ElementUI).use(VueEleComponentZonst).use(VueDND)
 import draggable from 'vuedraggable'
 Vue.component('draggable', draggable)
 new Vue({

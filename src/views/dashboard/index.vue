@@ -5,7 +5,7 @@
         <templateLeft />
       </el-aside>
       <el-main>
-        <adTemp />
+        <showTemp />
         <!--        <draggableMain />-->
       </el-main>
       <el-aside width="50px" style="height: calc(100vh - 60px);background: #f7f7f7; "><div @click="clickAside">>></div></el-aside>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import showTemp from '@/views/common/template/showTemp'
+
 import adTemp from '@/views/common/template/adTemp'
 import propertyConfig from '@/views/common/propertyConfig'
 
@@ -36,7 +38,8 @@ export default {
     draggableMain,
     templateLeft,
     adTemp,
-    propertyConfig
+    propertyConfig,
+    showTemp
   },
   data() {
     return {
