@@ -21,7 +21,7 @@
       </el-collapse-item>
     </el-collapse>
     <div style="margin-top: 10px; text-align: center">
-      <el-button type="primary" @click="addCol">新增一例</el-button>
+      <el-button type="primary" @click="addCol">新增</el-button>
 
     </div>
   </div>

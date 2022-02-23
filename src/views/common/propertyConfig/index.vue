@@ -1,6 +1,9 @@
 <template>
   <div style="padding: 0 20px">
     <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="全局配置" name="config">
+        <configData />
+      </el-tab-pane>
       <el-tab-pane label="Table属性配置" name="Table">
         <collapseProperty />
       </el-tab-pane>
@@ -26,12 +29,14 @@ import collapseProperty from './collapseProperty'
 import pageProperty from './pageProperty'
 import dialogFormProperty from './dialogFormProperty'
 import searchFormProperty from './searchFormProperty'
+import configData from './configData'
 
 import { generateCode } from './vueCode'
 export default {
   name: 'Index',
   components: {
     collapseProperty,
+    configData,
     pageProperty,
     dialogFormProperty,
     searchFormProperty,
@@ -39,7 +44,7 @@ export default {
   },
   data() {
     return {
-      activeName: 'Table',
+      activeName: 'config',
       content: ''
     }
   },
@@ -56,7 +61,9 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event)
-      this.content = generateCode(this.$store.state.tableConfig.addConfig)
+      if (tab.name === 'Code') {
+        this.content = generateCode(this.$store.state.tableConfig.addConfig)
+      }
     }
   }
 }

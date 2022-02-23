@@ -29,7 +29,7 @@
       </el-collapse-item>
     </el-collapse>
     <div style="margin-top: 10px; text-align: center">
-      <el-button type="primary" @click="addCol">新增一例</el-button>
+      <el-button type="primary" @click="addCol">新增条件</el-button>
     </div>
     <el-dialog
       title="JSON格式化"
@@ -118,7 +118,6 @@ export default {
           { title: '类型label', key: 'label', type: 'input', clearable: true },
           { title: '类型value', key: 'value', type: 'input', clearable: true },
           { title: '数据格式', key: 'dataJson', type: 'slotFormItem' }
-
         )
       }
 
