@@ -1,10 +1,9 @@
 <template>
   <div class="navbar" :style="{'background':navbarBackground }">
     <div class="logo">
-            <logo />
+      <logo />
     </div>
     <div class="navbarLogo">
-<!--      <Sidebar />-->
       <div class="right-menu">
         <template v-if="device!=='mobile'">
           <screenfull id="screenfull" class="right-menu-item hover-effect" :style="{'color':navbarColor }" />

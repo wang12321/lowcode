@@ -1,4 +1,4 @@
-import { REQUIRED, RULES } from '@/utils/Reg/validate'
+import { REQUIRED } from '@/utils/Reg/validate'
 
 const getDefaultState = () => {
   return {
@@ -13,9 +13,8 @@ const getDefaultState = () => {
         mounted: {},
         computed: {
           formOptions: [
-            { id: '1', title: '搜索', clearable: true, key: 'level', type: 'input' },
-            { id: '2', title: '搜索2', clearable: true, key: 'level1', type: 'input' }
-
+            { id: '1', titleShow: true, title: 'title', clearable: true, key: 'key', type: 'input', options: [], label: 'label', value: 'value', disabled: false },
+            { id: '2', titleShow: true, title: 'title2', clearable: true, key: 'key1', type: 'input', options: [], label: 'label', value: 'value', disabled: false }
           ]
         }
       },
@@ -108,6 +107,7 @@ const getDefaultState = () => {
 const state = getDefaultState()
 
 const mutations = {
+  // table
   set_tableColumn: (state, index) => {
     state.addConfig.TableComponent.data.tableColumn.push({
       id: `${index}`,
@@ -115,6 +115,21 @@ const mutations = {
       showOverflowTooltip: true,
       prop: `${index}`,
       align: 'left'
+    })
+  },
+  // search
+  set_formOptions: (state, index) => {
+    state.addConfig.SearchForm.computed.formOptions.push({
+      id: `${index}`,
+      title: `title${index}`,
+      clearable: true,
+      key: `key${index}`,
+      type: 'input',
+      titleShow: true,
+      options: [],
+      label: 'label',
+      value: 'value',
+      disabled: false
     })
   }
 }

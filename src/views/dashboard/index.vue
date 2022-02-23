@@ -26,18 +26,16 @@
 <script>
 import showTemp from '@/views/common/template/showTemp'
 
-import adTemp from '@/views/common/template/adTemp'
+// import adTemp from '@/views/common/template/adTemp'
 import propertyConfig from '@/views/common/propertyConfig'
 
-import draggableMain from '@/views/common/draggableMain'
+// import draggableMain from '@/views/common/draggableMain'
 import templateLeft from '@/views/common/templateLeft'
 
 export default {
   name: 'Index',
   components: {
-    draggableMain,
     templateLeft,
-    adTemp,
     propertyConfig,
     showTemp
   },

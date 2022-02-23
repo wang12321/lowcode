@@ -3,6 +3,7 @@
     <el-container>
       <el-header style="height: auto">
         <search-form
+          :key="tableComponentKey"
           :form-options="formOptions"
           :form-data="searchData"
           @submit="submit"

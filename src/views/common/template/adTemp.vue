@@ -142,15 +142,15 @@ export default {
       this.isShowDialogNode = false
     },
     submitSave() {
-      let data = {
-        game_id: Number(this.$route.params.id),
-        'activity_id': Number(this.formData.activity_id), // 活动id
-        'prop_id': Number(this.formData.prop_id), // 道具id
-        'prop_num': Number(this.formData.prop_num), // 道具数量
-        'level': Number(this.formData.level), // 道具等级
-        'probability': Number(this.formData.probability) // 概率
-      }
-      data = Object.assign({}, { ...this.formData }, data)
+      // let data = {
+      //   game_id: Number(this.$route.params.id),
+      //   'activity_id': Number(this.formData.activity_id), // 活动id
+      //   'prop_id': Number(this.formData.prop_id), // 道具id
+      //   'prop_num': Number(this.formData.prop_num), // 道具数量
+      //   'level': Number(this.formData.level), // 道具等级
+      //   'probability': Number(this.formData.probability) // 概率
+      // }
+      // data = Object.assign({}, { ...this.formData }, data)
       // const apiName = this.isCreateData ? postBlessActivitySupportRewardGuarantee : patchBlessActivitySupportRewardGuarantee
       // apiName(data, this.formData.id).then((res) => {
       //   this.isShowDialogNode = false

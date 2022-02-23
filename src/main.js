@@ -15,6 +15,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 import * as filters from './filters' // global filters
+import JsonViewer from 'vue-json-viewer'
+Vue.use(JsonViewer)
 
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
