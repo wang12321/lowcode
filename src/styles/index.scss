@@ -72,3 +72,10 @@ div:focus {
 .el-popper[x-placement^="bottom"] {
   margin-top: 0 !important;
 }
+
+.el-header {
+
+  iframe {
+    display: none;
+  }
+}

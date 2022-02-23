@@ -2,7 +2,7 @@
 // import prettier from 'prettier'
 export const generateCode = function(formJson) {
   console.log(111, `${formJson.TableComponent.data}`)
-  tableComponentData(formJson.TableComponent.data)
+  // tableComponentData(formJson.TableComponent.data)
 
   return `
   <template>
@@ -64,7 +64,7 @@ export const generateCode = function(formJson) {
 </script>`
 }
 
-//  递归
+//  table递归
 const tableComponentData = function(data) {
   console.log(data)
   return `

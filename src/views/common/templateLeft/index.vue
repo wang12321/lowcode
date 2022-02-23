@@ -3,7 +3,7 @@
     <div class="col">
       <draggable v-model="templateList" :options="{group:{name: 'itxst',pull:'clone'},sort: true}" animation="300" @start="onStart" @end="onEnd">
         <transition-group>
-          <div v-for="item in templateList" :key="item.id" :class="item.id==1?'item forbid':'item'">{{ item.name }}</div>
+          <div v-for="item in templateList" :key="item.id" style="margin-top: 10px" :class="item.id==1?'item forbid':'item'" @click="onClick(item)">{{ item.name }}</div>
         </transition-group>
       </draggable>
     </div>
@@ -18,11 +18,19 @@ export default {
       drag: false,
       // 定义要被拖拽对象的数组
       templateList: [
-        { id: 1, name: '增删改查模板', type: 'temp' }
+        { id: 1, name: '增删改查模板', type: 'temp' },
+        { id: 2, name: '表单设计', type: 'form' }
+
       ]
     }
   },
   methods: {
+    onClick(item) {
+      if (item.type === 'form') {
+        console.log(1212)
+        this.$router.push({ path: '/formDesign' })
+      }
+    },
     // 开始拖拽事件
     onStart() {
       this.drag = true

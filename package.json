@@ -21,6 +21,8 @@
     "test:ci": "npm run lint && npm run test:unit"
   },
   "dependencies": {
+    "@smallwei/avue": "^2.8.26",
+    "@sscfaith/avue-form-design": "^1.4.8",
     "awe-dnd": "^0.3.4",
     "axios": "0.18.1",
     "concurrently": "^6.2.0",

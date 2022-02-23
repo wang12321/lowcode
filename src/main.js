@@ -17,6 +17,12 @@ import '@/permission' // permission control
 import * as filters from './filters' // global filters
 import JsonViewer from 'vue-json-viewer'
 Vue.use(JsonViewer)
+import AvueFormDesign from '@sscfaith/avue-form-design'
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/index.css'
+Vue.use(Avue)
+
+Vue.use(AvueFormDesign)
 
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
