@@ -6,7 +6,7 @@ export default [
     meta: {
       title: '系统管理',
       icon: 'form',
-      permissionArray: [],
+      permissionArray: [1, 2, 3],
       sortIndex: 1,
       newTime: '2022-05-20'
     },
@@ -32,13 +32,12 @@ export default [
         path: 'user',
         name: 'user',
         meta: {
-          title: '用户管理',
+          title: '增删改查模板',
           icon: 'form',
-          permissionArray: [1, 2, 3],
-          sortIndex: 1,
-          newTime: '2022-05-20'
+          sortIndex: 4,
+          permissionArray: [1, 2, 3]
         },
-        index: 10,
+        index: 40,
         component: () => import('@/views/autoRouter/system/user.vue'),
         children: []
       },

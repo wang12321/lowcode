@@ -40,9 +40,7 @@ const getDefaultState = () => {
                 show: true,
                 btnType: 'danger',
                 method: (index, row) => {
-                  this.formData = { ...row }
-                  this.isCreateData = false
-                  this.isShowDialogNode = true
+                  console.log(row)
                 }
               }
             ]
@@ -239,6 +237,7 @@ const mutations = {
     } else {
       state.addConfig.DialogForm.data.rules[data.key] = [REQUIRED(`${data.title}`)]
     }
+    console.log(state.addConfig.DialogForm.data.rules)
   }
 }
 

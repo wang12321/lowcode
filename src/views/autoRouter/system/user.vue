@@ -1,115 +1,140 @@
 <template>
-  <CURDexample
-    :table-column="tableColumn"
-    :table-data="tableData"
-    :formlist="formlist"
-    :form-data="formData"
-    :dialog-form-data.sync="dialogFormData"
-    :is-advanced="isAdvanced"
-    :page-data="pageData"
-    @searchSubmit="searchSubmit"
-    @sortchange="sortchange"
-    @submitAdd="submitAdd"
-    @submitEdit="submitEdit"
-    @reloadData="reloadData"
-    @deleteData="deleteData"
-  />
+  <div>
+    <el-container>
+      <el-header style="height: auto">
+        <div>
+          <search-form
+            :form-options="formOptions"
+            :form-data="searchData"
+            @submit="submit"
+          >
+            <template v-slot:button>
+              <el-button type="primary" @click="buttonAction">新增</el-button>
+            </template>
+          </search-form>
+        </div>
+
+      </el-header>
+      <el-main>
+        <TableComponent
+          :table-data="tableData"
+          :table-column="tableColumn"
+          :options="options"
+          :operates="operates"
+        />
+        <Pagination :key="pageKey" :total="total" :page-data="pageData" @reloadData="reloadData" />
+      </el-main>
+    </el-container>
+    <el-dialog :visible.sync="isShowDialogNode" :title="isCreateData?'添加保底配置':'编辑保底配置'" width="50%">
+      <dialog-form
+        :form-list="formList"
+        :form-data="formData"
+        :rules="rules"
+        @submit="submitSave"
+        @CANCEL="CANCEL"
+      />
+    </el-dialog>
+  </div>
 </template>
 
 <script>
+import { REQUIRED } from '@/utils/Reg/validate'
 export default {
-  name: 'User',
+  name: 'GuaranteedConfig',
   meta: {
-    title: '用户管理',
+    title: '增删改查模板',
     icon: 'form',
-    permissionArray: [1, 2, 3],
-    sortIndex: 1,
-    newTime: '2022-05-20'
+    sortIndex: 4,
+    permissionArray: [1, 2, 3]
   },
   data() {
     return {
-      pageData: { total: 100, page: 1, rows: 20 },
-      isAdvanced: true,
-      formData: {},
-      dialogFormData: {},
-      formlist: [
-        { search: true, titleShow: true, clearable: true, title: '年份', key: 'year', type: 'year' },
-        { search: true, titleShow: true, clearable: true, title: '日期', key: 'date', type: 'date' }
-      ],
-      tableColumn: [
-        {
-          label: '名称',
-          prop: 'tzmc',
-          align: 'left',
-          add: true,
-          search: true,
-          rules: true,
-          placeholder: '请输入名称',
-          type: 'input',
-          isAdvanced: true
-        }, {
-          label: '权限',
-          prop: 'gxlx',
-          align: 'left',
-          add: true,
-          search: true,
-          type: 'select',
-          options: [{ value: '1', label: '是' }, { value: '2', label: '否' }],
-          optionLabel: 'label',
-          optionValue: 'value',
-          render: (h, params) => {
-            return h('span', { style: 'color: dodgerblue' }, params.row.gxlx)
-          }
-        }, {
-          label: '创建时间',
-          prop: 'lrsj',
-          formatter: (row) => {
-            return `<span style="color: dodgerblue;">${row.lrsj}</span>`
-          }
-        }, {
-          label: '更新时间',
-          prop: 'xgsj'
-        }
-      ],
-      tableData: [{
-        tzmc: '游戏',
-        lrsj: '2020-02-02',
-        xgsj: '2020-03-03',
-        gxlx: '全平台'
+      searchData: {},
+      rules: {
+        'name': [REQUIRED('第一列')]
       },
-      {
-        tzmc: '游戏1',
-        lrsj: '2020-02-02',
-        xgsj: '2020-03-03',
-        gxlx: '全平台'
-      }]
+      formData: {},
+      isCreateData: true,
+      isShowDialogNode: false,
+      pageKey: 0, // 刷新分页组件key
+      total: 0,
+
+      operates: {
+        isButton: false,
+        width: '80px',
+        label: '操作',
+        align: 'left',
+        list: [
+          {
+            label: '编辑',
+            show: true,
+            btnType: 'danger',
+            method: (index, row) => {
+              this.formData = { ...row }
+              this.isCreateData = false
+              this.isShowDialogNode = true
+            }
+          }
+        ]
+      },
+
+      tableColumn: [{
+        label: '第一列',
+        showOverflowTooltip: true,
+        prop: 'name',
+        align: 'left'
+      }
+      ],
+      tableData: [{}],
+      options: { 'loading': false, 'border': true }
+
+    }
+  },
+  computed: {
+    formList() {
+      return [
+        { title: '第一列', key: 'name', type: 'input', clearable: true }
+      ]
+    },
+    formOptions() {
+      return [
+        { titleShow: true, title: '第一列', key: 'name', type: 'input', clearable: true }
+      ]
+    },
+    pageData() {
+      return { total: this.total, page: 1, rows: 20 }
     }
   },
   mounted() {
+    this.updata()
   },
   methods: {
-    deleteData() {
-      alert('删除')
+    CANCEL() {
+      this.isShowDialogNode = false
     },
-    searchSubmit(data) {
-      console.log(data)
-      alert('查询了')
+    buttonAction() {
+      this.formData = {}
+      this.isCreateData = true
+      this.isShowDialogNode = true
     },
-    sortchange(e) {
-      console.log(e)
-      alert(e.column.label + '排序')
+    submitSave() {
+
     },
-    submitAdd(data) {
-      console.log(data)
-      alert('新增了')
+    // 数据请求
+    updata() {
+
     },
-    submitEdit() {
-      alert('编辑了')
+    // 查询
+    submit() {
+      this.pageData.page = 1
+      this.pageKey += 1
+      this.updata()
     },
+    // 分页
     reloadData() {
-      alert('当前页码' + this.pageData.page)
+      this.updata()
     }
+
   }
 }
 </script>
-

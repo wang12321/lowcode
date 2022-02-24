@@ -102,7 +102,6 @@ export default {
  *       @param {Boolean} disabled      选传，disabled 默认关闭
     * */
     formList() {
-      console.log(33222, this.formData)
       const formListArr = [{ title: '名称', key: 'title', type: 'input', clearable: true },
         { title: '是否隐藏名称', clearable: true, key: 'titleShow', type: 'radio', options: [{ value: true, label: true }, { value: false, label: false }], label: 'label', value: 'value' },
         { title: '设置字段名', key: 'key', type: 'input' },
@@ -127,7 +126,6 @@ export default {
   methods: {
     optionsAction() {
       this.formData['options'] = []
-      console.log(123, this.formData)
     },
     changeCollapse(index) {
       if (Number(index) > 0) {
@@ -138,7 +136,6 @@ export default {
       }
     },
     changeAction(item) {
-      console.log(111, item)
     },
     addCol() {
       this.$store.commit('tableConfig/set_formOptions', this.$store.state.tableConfig.addConfig.SearchForm.computed.formOptions.length + 1)
@@ -161,7 +158,6 @@ export default {
         this.formData['options'] = this.jsonData
         // this.$set(this.formData, 'options', this.jsonData)
       } catch (error) {
-        console.log(error)
         this.$message.error(`${error}`)
       }
     }

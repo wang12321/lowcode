@@ -13,9 +13,9 @@
       <el-tab-pane label="dialogForm属性配置" name="dialogForm">
         <dialogFormProperty />
       </el-tab-pane>
-      <el-tab-pane label="Page属性配置" name="Page">
-        <pageProperty />
-      </el-tab-pane>
+      <!--      <el-tab-pane label="Page属性配置" name="Page">-->
+      <!--        <pageProperty />-->
+      <!--      </el-tab-pane>-->
       <el-tab-pane label="API配置" name="API">API配置</el-tab-pane>
       <el-tab-pane label="生成代码" name="Code">
         <editor v-model="content" lang="html" theme="chrome" width="500" height="calc(100vh - 150px)" @init="editorInit" />
@@ -26,7 +26,7 @@
 
 <script>
 import collapseProperty from './collapseProperty'
-import pageProperty from './pageProperty'
+// import pageProperty from './pageProperty'
 import dialogFormProperty from './dialogFormProperty'
 import searchFormProperty from './searchFormProperty'
 import configData from './configData'
@@ -37,7 +37,6 @@ export default {
   components: {
     collapseProperty,
     configData,
-    pageProperty,
     dialogFormProperty,
     searchFormProperty,
     editor: require('vue2-ace-editor')
@@ -60,7 +59,6 @@ export default {
       require('brace/snippets/javascript') // snippet
     },
     handleClick(tab, event) {
-      console.log(tab, event)
       if (tab.name === 'Code') {
         this.content = generateCode(this.$store.state.tableConfig.addConfig)
       }

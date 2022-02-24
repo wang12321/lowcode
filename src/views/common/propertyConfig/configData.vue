@@ -53,7 +53,6 @@ export default {
       }
     },
     onChange() {
-      console.log(111122222, this.formData)
     },
     addCol() {
       this.$store.commit('tableConfig/set_allConfig', this.$store.state.tableConfig.allConfig.length + 1)

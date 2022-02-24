@@ -131,7 +131,6 @@ export default {
   },
   methods: {
     clickHeader() {
-      console.log(12311)
     },
     buttonAction() {
       this.formData = {}

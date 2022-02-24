@@ -19,7 +19,7 @@
           :table-data="tableConfig.data.tableData"
           :table-column="collapseList"
           :options="tableConfig.data.options"
-          :operates="tableConfig.data.operates"
+          :operates="operates"
         />
         <Pagination :key="pageKey" :page-data="pageData" @reloadData="reloadData" />
       </el-main>
@@ -54,7 +54,25 @@ export default {
       searchData: {},
       isShowDialogNode: false,
       isCreateData: true,
-      formData: {}
+      formData: {},
+      operates: {
+        isButton: false,
+        width: '80px',
+        label: '操作',
+        align: 'left',
+        list: [
+          {
+            label: '编辑',
+            show: true,
+            btnType: 'danger',
+            method: (index, row) => {
+              this.formData = { ...row }
+              this.isCreateData = false
+              this.isShowDialogNode = true
+            }
+          }
+        ]
+      }
     }
   },
   computed: {
@@ -97,6 +115,7 @@ export default {
 
     },
     buttonAction() {
+      this.formData = {}
       this.isCreateData = true
       this.isShowDialogNode = true
     },

@@ -27,7 +27,6 @@ export default {
   methods: {
     onClick(item) {
       if (item.type === 'form') {
-        console.log(1212)
         this.$router.push({ path: '/formDesign' })
       }
     },

@@ -111,7 +111,6 @@ export default {
  *       @param {Boolean} disabled      选传，disabled 默认关闭
     * */
     formList() {
-      console.log(33222, this.formData)
       const formListArr = [{ title: '名称', key: 'title', type: 'input', clearable: true },
         { title: '设置字段名', key: 'key', type: 'input' },
         { title: 'placeholder', key: 'placeholder', type: 'input' },
@@ -135,12 +134,10 @@ export default {
   methods: {
     onRule() {
       this.formData.isRule = this.radioRule
-      console.log(99999, this.formData.isRule)
       this.$store.commit('tableConfig/set_DialogFormRule', this.formData)
     },
     optionsAction() {
       this.formData['options'] = []
-      console.log(123, this.formData)
     },
     changeCollapse(index) {
       if (Number(index) > 0) {
@@ -153,7 +150,6 @@ export default {
       }
     },
     changeAction(item) {
-      console.log(111, item)
     },
     addCol() {
       this.$store.commit('tableConfig/set_DialogForm', this.$store.state.tableConfig.addConfig.DialogForm.computed.formList.length + 1)
@@ -176,7 +172,6 @@ export default {
         this.formData['options'] = this.jsonData
         // this.$set(this.formData, 'options', this.jsonData)
       } catch (error) {
-        console.log(error)
         this.$message.error(`${error}`)
       }
     }

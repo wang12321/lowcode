@@ -8,7 +8,7 @@ export default {
   meta: {
     title: '系统管理',
     icon: 'form',
-    permissionArray: [],
+    permissionArray: [1, 2, 3],
     sortIndex: 1,
     newTime: '2022-05-20'
   }
