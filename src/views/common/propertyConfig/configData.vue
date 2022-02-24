@@ -2,6 +2,9 @@
   <div>
     <el-collapse v-model="activeName" accordion style="height: calc(100vh - 200px); overflow: auto" @change="changeCollapse">
       <el-collapse-item v-for="(item,index) in collapseList" :key="item.id" v-dragging="{ item: item, list: collapseList, group: 'item' }" :title="item.label" :name="index+1">
+        <template slot="title">
+          {{ item.label }} <i class="el-icon-delete" style="margin-left: 10px;color: red" @click.stop="onDelete(item)" />
+        </template>
         <div class="table">
           <dialog-form
             label-width="140px"
@@ -45,6 +48,9 @@ export default {
     }
   },
   methods: {
+    onDelete(data) {
+      this.$store.commit('tableConfig/set_allConfigDel', data)
+    },
     changeCollapse(index) {
       if (Number(index) > 0) {
         this.formData = this.$store.state.tableConfig.allConfig[Number(index) - 1]

@@ -3,6 +3,17 @@
     <el-container>
       <el-header style="height: auto">
         <search-form
+          v-if="formOptions.length === 0"
+          :key="tableComponentKey"
+          :form-options="formOptions"
+          :form-data="searchData"
+        >
+          <template v-slot:button>
+            <el-button type="primary" @click="buttonAction">新增</el-button>
+          </template>
+        </search-form>
+        <search-form
+          v-else
           :key="tableComponentKey"
           :form-options="formOptions"
           :form-data="searchData"

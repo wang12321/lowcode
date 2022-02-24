@@ -117,6 +117,18 @@ const getDefaultState = () => {
 const state = getDefaultState()
 
 const mutations = {
+  set_DialogFormDel(state, data) {
+    state.addConfig.DialogForm.computed.formList = state.addConfig.DialogForm.computed.formList.filter(item => item.id !== data.id)
+  },
+  set_formOptionsDel(state, data) {
+    state.addConfig.SearchForm.computed.formOptions = state.addConfig.SearchForm.computed.formOptions.filter(item => item.id !== data.id)
+  },
+  set_tableColumnDel(state, data) {
+    state.addConfig.TableComponent.data.tableColumn = state.addConfig.TableComponent.data.tableColumn.filter(item => item.id !== data.id)
+  },
+  set_allConfigDel(state, data) {
+    state.allConfig = state.allConfig.filter(item => item.id !== data.id)
+  },
   // 全局配置应用，会配置表格,搜索，表单and必填数据
   set_saveConfig(state) {
     console.log('state.allConfig', state.allConfig)
@@ -176,7 +188,9 @@ const mutations = {
     state.addConfig.TableComponent.data.tableData.push(obj)
   },
   // config数据
-  set_allConfig: (state, index) => {
+  set_allConfig: (state, index1) => {
+    const lastObj = state.allConfig[state.allConfig.length - 1] || { id: 0 }
+    const index = Number(lastObj.id) + 1
     state.allConfig.push({
       id: `${index}`,
       label: `新增${index}`,
@@ -188,7 +202,9 @@ const mutations = {
     })
   },
   // table数据
-  set_tableColumn: (state, index) => {
+  set_tableColumn: (state, index1) => {
+    const lastObj = state.addConfig.TableComponent.data.tableColumn[state.addConfig.TableComponent.data.tableColumn.length - 1] || { id: 0 }
+    const index = Number(lastObj.id) + 1
     state.addConfig.TableComponent.data.tableColumn.push({
       id: `${index}`,
       label: `第${index}列`,
@@ -198,7 +214,9 @@ const mutations = {
     })
   },
   // search数据
-  set_formOptions: (state, index) => {
+  set_formOptions: (state, index1) => {
+    const lastObj = state.addConfig.SearchForm.computed.formOptions[state.addConfig.SearchForm.computed.formOptions.length - 1] || { id: 0 }
+    const index = Number(lastObj.id) + 1
     state.addConfig.SearchForm.computed.formOptions.push({
       id: `${index}`,
       title: `title${index}`,
@@ -213,7 +231,9 @@ const mutations = {
     })
   },
   // DialogForm 数据
-  set_DialogForm: (state, index) => {
+  set_DialogForm: (state, index1) => {
+    const lastObj = state.addConfig.DialogForm.computed.formList[state.addConfig.DialogForm.computed.formList.length - 1] || { id: 0 }
+    const index = Number(lastObj.id) + 1
     state.addConfig.DialogForm.computed.formList.push({
       id: `${index}`,
       title: `title${index}`,

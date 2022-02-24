@@ -46,6 +46,10 @@ import VueDND from 'awe-dnd' // 列表拖拽
 Vue.use(ElementUI).use(VueEleComponentZonst).use(VueDND)
 import draggable from 'vuedraggable'
 Vue.component('draggable', draggable)
+
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
 new Vue({
   el: '#app',
   router,

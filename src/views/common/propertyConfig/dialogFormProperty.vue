@@ -2,6 +2,9 @@
   <div>
     <el-collapse v-model="activeName" accordion style="height: calc(100vh - 200px); overflow: auto" @change="changeCollapse">
       <el-collapse-item v-for="(item,index) in formOptionsList" :key="item.id" v-dragging="{ item: item, list: formOptionsList, group: 'item' }" :title="item.title" :name="index+1">
+        <template slot="title">
+          {{ item.title }} <i class="el-icon-delete" style="margin-left: 10px;color: red" @click.stop="onDelete(item)" />
+        </template>
         <div class="table">
           <dialog-form
             label-width="140px"
@@ -132,6 +135,9 @@ export default {
     }
   },
   methods: {
+    onDelete(data) {
+      this.$store.commit('tableConfig/set_DialogFormDel', data)
+    },
     onRule() {
       this.formData.isRule = this.radioRule
       this.$store.commit('tableConfig/set_DialogFormRule', this.formData)

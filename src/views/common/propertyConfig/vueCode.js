@@ -7,17 +7,8 @@ export const generateCode = function(formJson) {
     <el-container>
       <el-header style="height: auto">
         <div>
-          <search-form
-            :form-options="formOptions"
-            :form-data="searchData"
-            @submit="submit"
-          >
-            <template v-slot:button>
-              <el-button type="primary" @click="buttonAction">新增</el-button>
-            </template>
-          </search-form>
+          ${searchForm(formJson.SearchForm.computed.formOptions)}
         </div>
-
       </el-header>
       <el-main>
         <TableComponent
@@ -106,12 +97,10 @@ export const generateCode = function(formJson) {
 
 //  table递归
 const tableComponentData = function(data) {
-  return `
-        operates: ${operates(data.operates)}
+  return `operates: ${operates(data.operates)}
         tableColumn: ${tableColumn(data.tableColumn)}
         tableData:[],
-        options: ${JSON.stringify(data.options)}
-  `
+        options: ${JSON.stringify(data.options)}`
 }
 
 // operates
@@ -124,8 +113,7 @@ const operates = function(data) {
            list: [
             ${list(data.list)}
            ]
-        },
-  `
+        },`
   function list(listdata) {
     let listStr = ``
     listdata.forEach(item => {
@@ -218,3 +206,21 @@ const formOptions = function(data) {
         ]
       }`
 }
+
+const searchForm = function(data) {
+  let searchFormStr = `<search-form
+            :form-options="formOptions"
+            :form-data="searchData"`
+  if (data && data.length > 0) {
+    searchFormStr += `
+             @submit="submit"
+  `
+  }
+  searchFormStr += `>
+            <template v-slot:button>
+              <el-button type="primary" @click="buttonAction">新增</el-button>
+            </template>
+            </search-form>`
+  return searchFormStr
+}
+
