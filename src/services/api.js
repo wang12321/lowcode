@@ -21,3 +21,4 @@ export const user = {
     return request.post(`${userUrl}/user/logout`, params)
   }
 }
+

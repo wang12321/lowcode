@@ -27,7 +27,7 @@
       <el-main>
         <TableComponent
           :key="tableComponentKey"
-          :table-data="tableConfig.data.tableData"
+          :table-data="tableData"
           :table-column="collapseList"
           :options="tableConfig.data.options"
           :operates="operates"
@@ -55,13 +55,16 @@
 <!--  :propValue="item.propValue"-->
 <!--/>-->
 <script>
+import request from '@/services/request'
+
 export default {
   name: 'ShowTemp',
   data() {
     return {
       tableComponentKey: 1,
-      total: 100,
+      total: 0,
       pageKey: 0,
+      tableData: [{}],
       searchData: {},
       isShowDialogNode: false,
       isCreateData: true,
@@ -116,6 +119,10 @@ export default {
     },
     tableConfig() {
       return this.dataProps.TableComponent
+    },
+    apiConfig() {
+      const apiConfig = this.$store.state.tableConfig.addConfig.apiConfig
+      return apiConfig
     }
   },
   mounted() {
@@ -123,7 +130,20 @@ export default {
   },
   methods: {
     submit() {
-
+      const domainName = this.apiConfig.domainName
+      request.get(`${this.apiConfig.domainName.url}${this.apiConfig.get.api}`, this.apiConfig.get.data).then((res) => {
+        console.log(1111, res, domainName)
+        if (Number(res[domainName.error_no]) !== 0) {
+          this.$message({
+            message: res.error_msg || 'Error',
+            type: 'error',
+            duration: 5 * 1000
+          })
+        } else {
+          this.tableData = res[domainName.data]
+          this.total = res[domainName.count]
+        }
+      })
     },
     buttonAction() {
       this.formData = {}

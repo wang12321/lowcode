@@ -69,6 +69,16 @@ router.post('/user/info', ctx => {
   ctx.body = fhcode(info)
 })
 
+// 用户信息
+router.get('/get/user/info', ctx => {
+  const info = [{
+    permission: [2],
+    introduction: 'I am an admin',
+    name: '管理员'
+  }]
+  ctx.body = fhcode(info)
+})
+
 // =======省外
 // 登入
 router.post('/sw/user/login', ctx => {

@@ -38,17 +38,17 @@ service.interceptors.response.use(
     }, 500)
 
     const res = response.data
-    if (Number(res.errno) !== 0) {
-      Message({
-        message: '响应拦截：' + res.message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      // sentry预留位置1 ---- 请不要删除
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else {
-      return res
-    }
+    // if (Number(res.errno) !== 0) {
+    //   Message({
+    //     message: '响应拦截：' + res.message || 'Error',
+    //     type: 'error',
+    //     duration: 5 * 1000
+    //   })
+    //   // sentry预留位置1 ---- 请不要删除
+    //   return Promise.reject(new Error(res.message || 'Error'))
+    // } else {
+    return res
+    // }
   },
   error => {
     setTimeout(() => {

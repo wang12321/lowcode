@@ -1,16 +1,55 @@
 import { REQUIRED } from '@/utils/Reg/validate'
-
+import apiURL from '@/services/apiURL'
+const accounts = apiURL[process.env.VUE_APP_BASE_API]
+const userUrl = accounts['user']
 const getDefaultState = () => {
   return {
     allConfig: [{
       id: '1',
       label: '第一列',
       prop: 'name',
+      type: 'int',
       isSearch: true,
       isForm: true,
       isRule: true
     }],
     addConfig: {
+      apiConfig: {
+        domainName: {
+          url: userUrl,
+          api: '/get/user/info',
+          count: 'count',
+          data: 'data',
+          error_msg: 'error_msg',
+          error_no: 'error_no',
+          res: JSON.stringify({
+            count: 0,
+            data: [],
+            error_msg: 'success',
+            error_no: 'no'
+          })
+        },
+        get: {
+          api: '/get/user/info',
+          data: '',
+          id: ''
+        },
+        post: {
+          api: '',
+          data: '',
+          id: ''
+        },
+        delect: {
+          api: '',
+          data: '',
+          id: ''
+        },
+        patch: {
+          api: '',
+          data: '',
+          id: ''
+        }
+      },
       SearchForm: {
         component: 'search-form',
         data: {
@@ -51,28 +90,7 @@ const getDefaultState = () => {
             border: true
           },
           tableColumn: [
-            // {
-            //   id: '1',
-            //   label: '第一列',
-            //   showOverflowTooltip: true,
-            //   prop: 'one',
-            //   align: 'center',
-            //   width: '100px'
-            // },
-            // {
-            //   id: '2',
-            //   label: '第二列',
-            //   showOverflowTooltip: true,
-            //   prop: 'tow',
-            //   align: 'center'
-            // },
-            // {
-            //   id: '3',
-            //   label: '第三列',
-            //   showOverflowTooltip: true,
-            //   prop: 'three',
-            //   align: 'left'
-            // }
+
           ]
         },
         methods: {}, // 事件列表
@@ -95,9 +113,7 @@ const getDefaultState = () => {
           isCreateData: true,
           isShowDialogNode: false,
           rules: {
-            // one: [REQUIRED('第一列')],
-            // tow: [REQUIRED('第二列')],
-            // three: [REQUIRED('第三列')]
+
           },
           formData: {}
         },
@@ -117,6 +133,19 @@ const getDefaultState = () => {
 const state = getDefaultState()
 
 const mutations = {
+  // 接口请求
+  set_apiConfig(state) {
+    const obj = {}
+    obj[state.addConfig.apiConfig.domainName.count] = 0
+    obj[state.addConfig.apiConfig.domainName.data] = []
+    obj[state.addConfig.apiConfig.domainName.error_msg] = 'success'
+    obj[state.addConfig.apiConfig.domainName.error_no] = '0'
+    state.addConfig.apiConfig.domainName.res = JSON.stringify(obj)
+    state.addConfig.apiConfig.get.api = state.addConfig.apiConfig.domainName.api
+    state.addConfig.apiConfig.post.api = state.addConfig.apiConfig.domainName.api
+    state.addConfig.apiConfig.patch.api = state.addConfig.apiConfig.domainName.api
+    state.addConfig.apiConfig.delect.api = state.addConfig.apiConfig.domainName.api
+  },
   set_DialogFormDel(state, data) {
     state.addConfig.DialogForm.computed.formList = state.addConfig.DialogForm.computed.formList.filter(item => item.id !== data.id)
   },
@@ -195,6 +224,7 @@ const mutations = {
       id: `${index}`,
       label: `新增${index}`,
       prop: `${index}`,
+      type: 'int',
       placeholder: '',
       isSearch: false,
       isForm: true,

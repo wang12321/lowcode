@@ -8,7 +8,15 @@
         <showTemp />
         <!--        <draggableMain />-->
       </el-main>
-      <el-aside width="50px" style="height: calc(100vh - 60px);background: #f7f7f7; "><div @click="clickAside">>></div></el-aside>
+      <el-aside width="50px" style="height: calc(100vh - 60px);background: #f7f7f7; ">
+        <div style="padding: 15px;padding-top: calc(50vh - 150px);color: red" @click="clickAside">
+          <p>打</p>
+          <p>开</p>
+          <p>配</p>
+          <p>置</p>
+          <p><i class="el-icon-back" /></p>
+        </div>
+      </el-aside>
       <el-drawer
         title=""
         :visible.sync="drawer"
@@ -17,7 +25,6 @@
         :before-close="handleClose"
       >
         <propertyConfig />
-
       </el-drawer>
     </el-container>
   </div>

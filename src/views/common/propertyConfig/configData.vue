@@ -40,6 +40,7 @@ export default {
       return [
         { title: '显示名称', key: 'label', type: 'input', clearable: true, change: this.onChange },
         { title: '读取字段', key: 'prop', type: 'input', clearable: true },
+        { title: '字段类型', key: 'type', type: 'input', clearable: true },
         { title: '是否搜索配置', clearable: true, key: 'isSearch', type: 'radio', options: [{ value: true, label: true }, { value: false, label: false }], label: 'label', value: 'value' },
         { title: '是否表单配置', clearable: true, key: 'isForm', type: 'radio', options: [{ value: true, label: true }, { value: false, label: false }], label: 'label', value: 'value' },
         { title: '是否必填', clearable: true, key: 'isRule', type: 'radio', options: [{ value: true, label: true }, { value: false, label: false }], label: 'label', value: 'value' }

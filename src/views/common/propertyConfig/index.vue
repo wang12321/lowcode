@@ -16,7 +16,9 @@
       <!--      <el-tab-pane label="Page属性配置" name="Page">-->
       <!--        <pageProperty />-->
       <!--      </el-tab-pane>-->
-      <el-tab-pane label="API配置" name="API">API配置</el-tab-pane>
+      <el-tab-pane label="API配置" name="API">
+        <apiConfig />
+      </el-tab-pane>
       <el-tab-pane label="生成代码" name="Code">
         <editor v-model="content" lang="html" theme="chrome" width="100%" height="calc(100vh - 200px)" @init="editorInit" />
         <div style="margin-top: 10px; text-align: center">
@@ -29,6 +31,8 @@
 
 <script>
 import collapseProperty from './collapseProperty'
+import apiConfig from './apiConfig'
+import editorMixin from '../mixins/editorCode'
 // import pageProperty from './pageProperty'
 import dialogFormProperty from './dialogFormProperty'
 import searchFormProperty from './searchFormProperty'
@@ -42,12 +46,14 @@ export default {
     configData,
     dialogFormProperty,
     searchFormProperty,
-    editor: require('vue2-ace-editor')
+    apiConfig
   },
+  mixins: [
+    editorMixin
+  ],
   data() {
     return {
-      activeName: 'config',
-      content: ''
+      activeName: 'config'
     }
   },
   computed: {
@@ -62,14 +68,6 @@ export default {
         err => {
           this.$message.error('复制失败')
         })
-    },
-    editorInit: function() {
-      require('brace/ext/language_tools') // language extension prerequsite...
-      require('brace/mode/html')
-      require('brace/mode/javascript') // language
-      require('brace/mode/less')
-      require('brace/theme/chrome')
-      require('brace/snippets/javascript') // snippet
     },
     handleClick(tab, event) {
       if (tab.name === 'Code') {
