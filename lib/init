@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const { resolve } = require('path')
+const { run } = require('runjs')
+
+module.exports = async() => {
+  // eslint-disable-next-line no-path-concat
+  console.log('__dirname : ' + __dirname)
+  console.log('resolve   : ' + resolve('./'))
+  run(`node code`, { cwd: `${__dirname}` })
+}

@@ -11,7 +11,7 @@ const development = {
 }
 const production = {
   UnifiedLogin: 'http://login.xq5.com',
-  user: 'http://127.0.0.1:9000'
+  user: 'http://127.0.0.1:8090'
 
 }
 module.exports = {
