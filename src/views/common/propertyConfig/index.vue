@@ -72,6 +72,8 @@ export default {
     handleClick(tab, event) {
       if (tab.name === 'Code') {
         this.content = generateCode(this.$store.state.tableConfig.addConfig)
+      } else if (tab.name === 'API') {
+        this.$store.commit('tableConfig/set_JsonData', this.$store.state.tableConfig.addConfig.apiConfig.post.data)
       }
     }
   }

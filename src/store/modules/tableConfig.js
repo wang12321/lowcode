@@ -20,8 +20,8 @@ const getDefaultState = () => {
           api: '/get/user/info',
           count: 'count',
           data: 'data',
-          error_msg: 'error_msg',
-          error_no: 'error_no',
+          error_msg: 'msg',
+          error_no: 'errno',
           res: JSON.stringify({
             count: 0,
             data: [],
@@ -133,6 +133,27 @@ const getDefaultState = () => {
 const state = getDefaultState()
 
 const mutations = {
+  // 请求数据JSON
+  set_addData(state, data) {
+    state.addConfig.apiConfig.post.data = data
+    state.addConfig.apiConfig.patch.data = data
+  },
+  // 初始化请求数据JSON
+  set_JsonData(state, data) {
+    console.log(111, data)
+
+    if (data && data.length !== 0 && data !== '{}') {
+      state.addConfig.apiConfig.post.data = data
+    } else {
+      const obj = {}
+      state.addConfig.DialogForm.computed.formList.forEach(item => {
+        obj[item.key] === state.addConfig.DialogForm.data.formData[item.key]
+      })
+      console.log(111, obj)
+      state.addConfig.apiConfig.post.data = JSON.stringify(obj)
+      state.addConfig.apiConfig.patch.data = JSON.stringify(obj)
+    }
+  },
   // 接口请求
   set_apiConfig(state) {
     const obj = {}

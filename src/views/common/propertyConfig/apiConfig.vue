@@ -16,7 +16,11 @@
             label-width="140px"
             :form-list="formListGet"
             :form-data="get"
-          />
+          >
+            <template v-slot:dataJson>
+              <jsonData @jsonDataAction="jsonDataAction('GET请求')" />
+            </template>
+          </dialog-form>
         </div>
       </el-collapse-item>
       <el-collapse-item title="POST请求 ">
@@ -25,7 +29,11 @@
             label-width="140px"
             :form-list="formListGet"
             :form-data="post"
-          />
+          >
+            <template v-slot:dataJson>
+              <jsonData @jsonDataAction="jsonDataAction('POST请求')" />
+            </template>
+          </dialog-form>
         </div>
       </el-collapse-item>
       <el-collapse-item title="PATCH请求 ">
@@ -34,7 +42,10 @@
             label-width="140px"
             :form-list="formListGet"
             :form-data="patch"
-          />
+          > <template v-slot:dataJson>
+            <jsonData @jsonDataAction="jsonDataAction('PATCH请求')" />
+          </template>
+          </dialog-form>
         </div>
       </el-collapse-item>
       <el-collapse-item title="DELECT请求 ">
@@ -43,28 +54,43 @@
             label-width="140px"
             :form-list="formListGet"
             :form-data="delect"
-          />
+          > <template v-slot:dataJson>
+            <jsonData @jsonDataAction="jsonDataAction('DELECT请求')" />
+          </template>
+          </dialog-form>
         </div>
       </el-collapse-item>
     </el-collapse>
     <div style="margin-top: 10px; text-align: center">
-      <!--      <el-button type="primary" @click="addCol"></el-button>-->
+      <el-button type="primary" @click="apicode">生成api代码</el-button>
     </div>
+    <dialogJson :is-show-dialog.sync="dialogVisible" :title="titleName" :form-info="jsonData" :is-create-data="isCreateData" @updata="updata" />
+
   </div>
 </template>
 
 <script>
+import jsonData from '@/views/common/propertyConfig/jsonData'
+import dialogJson from '@/views/common/propertyConfig/dialogJson'
+
 export default {
   name: 'ApiConfig',
+  components: {
+    jsonData,
+    dialogJson
+  },
   data() {
     return {
+
       dialogVisible: false,
+      isCreateData: false,
       activeName: '1',
       formData: {},
       indexData: 1,
       jsonDataStr: '',
       jsonData: {},
-      radioRule: false
+      radioRule: false,
+      titleName: ''
     }
   },
   computed: {
@@ -102,12 +128,24 @@ export default {
     formListGet() {
       return [
         { title: '设置API', key: 'api', type: 'input' },
-        { title: '传参数据', key: 'data', type: 'input' },
-        { title: 'ID', key: 'id', type: 'input' }
+        { title: 'ID', key: 'id', type: 'input' },
+        { title: '传参数据', key: 'dataJson', type: 'slotFormItem' }
+
       ]
     }
   },
   methods: {
+    jsonDataAction(data) {
+      console.log(111)
+      this.dialogVisible = true
+      this.titleName = data
+    },
+    apicode() {
+
+    },
+    updata() {
+
+    },
     onChange() {
       this.$store.commit('tableConfig/set_apiConfig')
     },
@@ -118,13 +156,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.table {
-
-  .el-col-24 {
-    width: 100%;
-    height: 45px;
-  }
-}
-</style>
