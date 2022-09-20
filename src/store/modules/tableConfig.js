@@ -18,6 +18,8 @@ const getDefaultState = () => {
         domainName: {
           url: userUrl,
           api: '/get/user/info',
+          apiUrl: 'xxlUrl',
+          name: 'userInfo',
           count: 'count',
           data: 'data',
           error_msg: 'msg',
@@ -32,19 +34,23 @@ const getDefaultState = () => {
         get: {
           api: '/get/user/info',
           data: '',
-          id: ''
+          id: '',
+          name: ''
         },
         post: {
           api: '',
           data: '',
-          id: ''
+          id: '',
+          name: ''
         },
-        delect: {
+        delete: {
           api: '',
           data: '',
-          id: ''
+          id: '',
+          name: ''
         },
         patch: {
+          name: '',
           api: '',
           data: '',
           id: ''
@@ -133,6 +139,11 @@ const getDefaultState = () => {
 const state = getDefaultState()
 
 const mutations = {
+  // 请求接口新增
+  set_addApi(state, data) {
+    // state.addConfig.apiConfig.p
+    // state.addConfig.apiConfig.patch.data = data
+  },
   // 请求数据JSON
   set_addData(state, data) {
     state.addConfig.apiConfig.post.data = data
@@ -140,8 +151,6 @@ const mutations = {
   },
   // 初始化请求数据JSON
   set_JsonData(state, data) {
-    console.log(111, data)
-
     if (data && data.length !== 0 && data !== '{}') {
       state.addConfig.apiConfig.post.data = data
     } else {
@@ -162,10 +171,16 @@ const mutations = {
     obj[state.addConfig.apiConfig.domainName.error_msg] = 'success'
     obj[state.addConfig.apiConfig.domainName.error_no] = '0'
     state.addConfig.apiConfig.domainName.res = JSON.stringify(obj)
-    state.addConfig.apiConfig.get.api = state.addConfig.apiConfig.domainName.api
-    state.addConfig.apiConfig.post.api = state.addConfig.apiConfig.domainName.api
-    state.addConfig.apiConfig.patch.api = state.addConfig.apiConfig.domainName.api
-    state.addConfig.apiConfig.delect.api = state.addConfig.apiConfig.domainName.api
+
+    // eslint-disable-next-line no-undef
+    Object.keys(state.addConfig.apiConfig).forEach((item, index) => {
+      if (index > 0) {
+        console.log(item, index)
+        // eslint-disable-next-line no-undef
+        state.addConfig.apiConfig[item].api = state.addConfig.apiConfig.domainName.api
+        state.addConfig.apiConfig[item].name = state.addConfig.apiConfig.domainName.name
+      }
+    })
   },
   set_DialogFormDel(state, data) {
     state.addConfig.DialogForm.computed.formList = state.addConfig.DialogForm.computed.formList.filter(item => item.id !== data.id)

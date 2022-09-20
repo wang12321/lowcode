@@ -20,7 +20,7 @@ export const generateCode = function(formJson) {
         <Pagination :key="pageKey" :total="total" :page-data="pageData" @reloadData="reloadData" />
       </el-main>
     </el-container>
-    <el-dialog :visible.sync="isShowDialogNode" :title="isCreateData?'添加配置':'编辑配置'" width="50%">
+    <el-dialog :visible.sync="isShowDialogNode" :title="isCreateData?'添加':'编辑'" width="50%">
       <dialog-form
         :form-list="formList"
         :form-data="formData"
